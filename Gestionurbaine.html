@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion Urbaine - Casablanca</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.26/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      #formDiv {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+      }
+      #gpForm {
+        margin-top: 15px;
+      }
+      #runGPBtn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #runGPBtn:hover {
+        background-color: var(--secondary-color);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="accueil.html">
+          <i class="fas fa-map-marked-alt me-2"></i>Casablanca
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="accueil.html">
+                <i class="fas fa-home me-1"></i> Accueil
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="communesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-city me-1"></i> Communes
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="prefecture.html">Préfecture</a>
+                <a class="dropdown-item" href="communes_Arron.html"
+                  >Commune/Arrondissement</a
+                >
+                <a class="dropdown-item" href="Grande_surface_wgs.html"
+                  >Surface</a
+                >
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Casa_population.html">
+                <i class="fas fa-users me-1"></i> Population
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Reclamation.html">
+                <i class="fas fa-comment-alt me-1"></i> Réclamation
+              </a>
+            </li>
+            <li class="nav-item"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">Gestion des Projets Urbains</h1>
+          <p class="lead">Sites projet et SDAU de Casablanca</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="map-container">
+              <div id="viewDivv" style="height: 600px"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-header bg-primary text-white">
+                <h5>
+                  <i class="fas fa-project-diagram me-2"></i>Nouveau Projet
+                </h5>
+              </div>
+              <div class="card-body">
+                <div id="formDiv">
+                  <form id="gpForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                      <label for="titreProjet" class="form-label"
+                        >Titre du projet</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="titreProjet"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Veuillez saisir un titre pour le projet
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="typeProjet" class="form-label"
+                        >Type de projet</label
+                      >
+                      <select class="form-select" id="typeProjet" required>
+                        <option value="" selected disabled>Choisir...</option>
+                        <option value="sdu">SDAU</option>
+                        <option value="projet">Projet urbain</option>
+                        <option value="amenagement">Aménagement</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="dateDebut" class="form-label"
+                        >Date de début</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="dateDebut"
+                        required
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      class="btn btn-primary w-100"
+                      id="runGPBtn"
+                    >
+                      <i class="fas fa-play-circle me-2"></i>Lancer le
+                      traitement
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-info-circle me-2"></i>Instructions</h5>
+              </div>
+              <div class="card-body">
+                <ol class="list-group list-group-numbered">
+                  <li class="list-group-item">
+                    Sélectionnez une zone sur la carte
+                  </li>
+                  <li class="list-group-item">
+                    Remplissez les détails du projet
+                  </li>
+                  <li class="list-group-item">
+                    Lancez le traitement géographique
+                  </li>
+                  <li class="list-group-item">Consultez les résultats</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container text-center">
+        <p>© 2023 Ville de Casablanca - Direction de l'Urbanisme</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://js.arcgis.com/4.26/"></script>
+    <script src="Gestionurbaine.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var forms = document.querySelectorAll(".needs-validation");
+
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>

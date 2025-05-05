@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Géoportail Casablanca - Communes et Arrondissements</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.26/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="accueil.html">
+          <i class="fas fa-map-marked-alt me-2"></i>Casablanca
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="accueil.html">
+                <i class="fas fa-home me-1"></i> Home
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="communesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-city me-1"></i> Communes
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="prefecture.html">Préfecture</a>
+                <a class="dropdown-item" href="communes_Arron.html"
+                  >Commune/Arrondissement</a
+                >
+                <a class="dropdown-item" href="Grande_surface_wgs.html"
+                  >Surface</a
+                >
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Casa_population.html">
+                <i class="fas fa-users me-1"></i> Population
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Reclamation.html">
+                <i class="fas fa-comment-alt me-1"></i> Réclamation
+              </a>
+            </li>
+            <li class="nav-item"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <div class="container">
+        <div class="page-header animate-entry">
+          <h1 class="page-title">Communes et Arrondissements de Casablanca</h1>
+          <p class="lead">
+            Vous trouvez ici les communes et les arrondissements de Casablanca
+            ainsi que Les hôtels y disponibles
+          </p>
+          <p>Il y'a 16 arrondissements et 18 communes (municipalités)</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="map-container animate-entry">
+              <div id="viewDiv" style="height: 500px"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h3 class="mb-3">
+              <i class="fas fa-hotel me-2"></i>Les grandes surfaces
+            </h3>
+            <div class="map-container animate-entry">
+              <div id="viewDivv" style="height: 500px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <p>© 2023 Ville de Casablanca - Direction de l'Urbanisme</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://js.arcgis.com/4.26/"></script>
+    <script src="communes_Arron.js"></script>
+    <script src="communes_Surface.js"></script>
+  </body>
+</html>

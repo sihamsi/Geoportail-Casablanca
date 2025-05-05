@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Géoportail Casablanca - Accueil</title>
+
+    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.26/esri/themes/light/main.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="monstyleCom.css" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+
+    <style>
+      :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f8f9fa;
+        padding-top: 70px;
+      }
+
+
+      .navbar {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: white !important;
+      }
+
+      .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 400;
+        padding: 0.5rem 1rem;
+        margin: 0 0.2rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .dropdown-menu {
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown-item:hover {
+        background-color: var(--secondary-color);
+        color: white !important;
+      }
+
+
+      .main-content {
+        min-height: calc(100vh - 120px);
+        padding: 2rem 0;
+      }
+
+      .page-title {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .map-container {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .map-container:hover {
+        transform: translateY(-5px);
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+      }
+
+      .animate__delay-02s {
+        animation-delay: 0.2s;
+      }
+
+      .animate__delay-04s {
+        animation-delay: 0.4s;
+      }
+
+      #sidebar {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      #container {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark fixed-top animate__animated animate__fadeInDown"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand animate__animated animate__fadeInLeft"
+          href="accueil.html"
+        >
+          <i class="fas fa-map-marked-alt me-2"></i>Géoportail Casablanca
+        </a>
+
+        <button
+          class="navbar-toggler animate__animated animate__fadeInRight"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav ms-auto">
+            <li
+              class="nav-item animate__animated animate__fadeInDown animate__delay-02s"
+            >
+              <a class="nav-link active" href="accueil.html">
+                <i class="fas fa-home me-1"></i> Accueil
+              </a>
+            </li>
+
+            <li
+              class="nav-item dropdown animate__animated animate__fadeInDown animate__delay-04s"
+            >
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="communesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-city me-1"></i> Communes
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="prefecture.html"
+                  >Par préfecture</a
+                >
+                <a class="dropdown-item" href="communes_Arron.html"
+                  >Commune/Arrondissement</a
+                >
+                <a class="dropdown-item" href="Grande_surface_wgs.html">Par surface</a>
+              </div>
+            </li>
+
+            <li
+              class="nav-item animate__animated animate__fadeInDown animate__delay-06s"
+            >
+              <a class="nav-link" href="Casa_population.html">
+                <i class="fas fa-users me-1"></i> Population
+              </a>
+            </li>
+
+            <li
+              class="nav-item animate__animated animate__fadeInDown animate__delay-08s"
+            ></li>
+
+            <li
+              class="nav-item animate__animated animate__fadeInDown animate__delay-1s"
+            >
+              <a class="nav-link" href="reclamation.html">
+                <i class="fas fa-comment-alt me-1"></i> Réclamation
+              </a>
+            </li>
+
+            <li
+              class="nav-item animate__animated animate__fadeInDown animate__delay-12s"
+            >
+              <a class="nav-link" href="Gestionurbaine.html">
+                <i class="fas fa-tasks me-1"></i> Gestion urbaine
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container">
+        <h1 class="page-title animate__animated animate__fadeIn">
+          Géoportail du Grand Casablanca
+        </h1>
+
+        <p class="animate__animated animate__fadeIn" style="margin-left: 20px">
+          La carte de Casablanca
+        </p>
+
+        <div id="container">
+          <div class="row">
+            <div class="col-md-4 animate__animated animate__fadeInLeft">
+              <div id="sidebar">
+                Casablanca est la plus grande ville du Maghreb par sa population
+                ; lors du recensement de 2014, sa population était de 4 359 818
+                habitants, faisant d'elle la ville la plus peuplée du royaume.
+                Sur le plan administratif, son territoire — à distinguer de
+                celui de l'agglomération incluant sa banlieue — d'une superficie
+                de 384 km², correspond à celui de la municipalité de Casablanca
+                qui est divisée en seize arrondissements répartis dans huit
+                préfectures. Le Méchouar de Casablanca où siège un palais royal
+                forme sa propre micro-municipalité. La ville possède un
+                patrimoine architectural moderne important grâce à la diversité
+                architecturale qu'elle connaît pendant le xxe siècle et qui fait
+                d'elle le « laboratoire de la modernité » d'une nouvelle
+                génération d'architectes qui ont étudié à l'École nationale
+                supérieure des beaux-arts de Paris
+              </div>
+            </div>
+
+            <div class="col-md-8 animate__animated animate__fadeInRight">
+              <div class="map-container">
+                <div id="viewDiv" style="height: 600px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="animate__animated animate__fadeInUp">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>
+              <i class="fas fa-university me-2"></i>Ministère de l'Urbanisme
+            </h5>
+            <p>Projet de géoportail urbain - TP SIG 2023</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-white"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://js.arcgis.com/4.26/"></script>
+    <script src="map.js"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/Legend",
+        "esri/widgets/Search",
+        "esri/widgets/BasemapToggle",
+      ], function (Map, MapView, Legend, Search, BasemapToggle) {
+
+        const map = new Map({
+          basemap: "streets-navigation-vector",
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-7.589, 33.573], 
+          zoom: 12,
+        });
+
+        const searchWidget = new Search({ view: view });
+        view.ui.add(searchWidget, { position: "top-right" });
+
+        const legend = new Legend({ view: view });
+        view.ui.add(legend, "bottom-left");
+
+        const basemapToggle = new BasemapToggle({
+          view: view,
+          nextBasemap: "satellite",
+        });
+        view.ui.add(basemapToggle, "bottom-right");
+
+
+        view.when(() => {
+          document
+            .querySelector(".map-container")
+            .classList.add("animate__zoomIn");
+        });
+      });
+    </script>
+  </body>
+</html>
